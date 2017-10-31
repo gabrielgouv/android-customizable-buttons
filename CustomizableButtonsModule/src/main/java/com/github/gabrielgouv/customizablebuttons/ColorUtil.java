@@ -2,23 +2,18 @@ package com.github.gabrielgouv.customizablebuttons;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.util.Log;
 
-/**
- * Created by Gabriel Gouveia on 25/10/2017.
- */
 
 public final class ColorUtil {
 
-    public static ColorStateList getRippleColorFromColor(int color, int alpha) {
+    static ColorStateList getRippleColorFromColor(int color, float opacity) {
 
-        ColorStateList c = ColorStateList.valueOf(color);
-        c.withAlpha(alpha);
-
-        return c;
+        return ColorStateList.valueOf(useOpacity(color, opacity));
 
     }
 
-    public static int darkLightColor(int color, float factor) {
+    static int darkenLightenColor(int color, float factor) {
         int a = Color.alpha(color);
         int r = Math.round(Color.red(color) * factor);
         int g = Math.round(Color.green(color) * factor);
@@ -30,15 +25,41 @@ public final class ColorUtil {
                 Math.min(b,255));
     }
 
-    public static int manipulateAlpha(int color, int alpha) {
+    static int useOpacity(int color, float opacity) {
+        int a = Math.round(opacity * 255);
         int r = Math.round(Color.red(color));
         int g = Math.round(Color.green(color));
         int b = Math.round(Color.blue(color));
 
-        return Color.argb(Math.min(alpha, 255),
+        return Color.argb(Math.min(a, 255),
                 Math.min(r,255),
                 Math.min(g,255),
                 Math.min(b,255));
+    }
+
+    /**
+     * Check if a color is dark or light
+     * @see [http://en.wikipedia.org/wiki/HSL_and_HSV#Lightness]
+     *
+     * @param color
+     * @return true if the color is dark or false if light
+     */
+    static boolean isDarkColor(int color) {
+
+        float r = Color.red(color) / 255f;
+        float g = Color.green(color) / 255f;
+        float b = Color.blue(color) / 255f;
+
+        float luma = (r * 0.299f) + (g * 0.587f) + (b * 0.114f);
+
+        return luma < 0.5;
+
+    }
+
+    static int getTextColorFromBackgroundColor(int color) {
+
+        return isDarkColor(color) ? Color.WHITE : Color.BLACK;
+
     }
 
 }

@@ -7,37 +7,40 @@
         <attr name="android:text" />
         <attr name="android:textSize" />
         <attr name="android:textAllCaps" />
+        <attr name="android:textStyle" />
 
         <!-- default -->
         <attr name="cb_textColor" format="color"/>
         <attr name="cb_backgroundColor" format="color"/>
+        <attr name="cb_backgroundColorOpacity" format="float"/>
         <attr name="cb_borderColor" format="color"/>
         <attr name="cb_borderThickness" format="dimension"/>
         <attr name="cb_borderRadius" format="dimension"/>
-        <attr name="cb_elevation" format="dimension"/>
-        <attr name="cb_outline" format="boolean"/>
 
         <!-- pressed -->
         <attr name="cb_textColorPressed" format="color"/>
         <attr name="cb_backgroundColorPressed" format="color"/>
+        <attr name="cb_backgroundColorOpacityPressed" format="float"/>
         <attr name="cb_borderColorPressed" format="color"/>
         <attr name="cb_borderThicknessPressed" format="dimension"/>
         <attr name="cb_borderRadiusPressed" format="dimension"/>
-        <attr name="cb_elevationPressed" format="dimension"/>
 
         <!-- disabled -->
         <attr name="cb_textColorDisabled" format="color"/>
         <attr name="cb_backgroundColorDisabled" format="color"/>
+        <attr name="cb_backgroundColorOpacityDisabled" format="float"/>
         <attr name="cb_borderColorDisabled" format="color"/>
         <attr name="cb_borderThicknessDisabled" format="dimension"/>
         <attr name="cb_borderRadiusDisabled" format="dimension"/>
-        <attr name="cb_elevationDisabled" format="dimension"/>
 
         <attr name="cb_text" format="string"/>
         <attr name="cb_textSize" format="dimension"/>
+        <attr name="cb_textAllCaps" format="boolean"/>
+        <attr name="cb_textStyle" format="enum"/>
         <attr name="cb_useRippleEffect" format="boolean"/>
         <attr name="cb_rippleColor" format="color"/>
-        <attr name="cb_rippleAlpha" format="integer"/>
+        <attr name="cb_rippleOpacity" format="float"/>
+        <attr name="cb_elevation" format="dimension"/>
 
     </declare-styleable>
 
