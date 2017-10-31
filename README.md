@@ -1,6 +1,6 @@
-# [WIP] Android-Customizable-Buttons
-Easily create beautiful buttons for Android
+![sample](https://i.imgur.com/tAezhoj.png)
 
 [WIP] Documentation soon.
 
 ![sample](https://i.imgur.com/8QRp4Sh.gif)
+
