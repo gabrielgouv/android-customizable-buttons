@@ -2,5 +2,4 @@
 
 [WIP] Documentation soon.
 
-![sample](https://i.imgur.com/8QRp4Sh.gif)
-
+![sample](https://i.imgur.com/da0NXnf.gif)
