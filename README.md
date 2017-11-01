@@ -1,6 +1,6 @@
-# [WIP] Android-Customizable-Buttons
-Easily create beautiful buttons for Android
+![sample](https://i.imgur.com/EHvANGf.png)
+Create an XML file that represents the button states? Create an XML file that represents each button state? No more. With Customizable Buttons for Android you can easily create custom buttons for your app!
 
 [WIP] Documentation soon.
 
-![sample](https://i.imgur.com/8QRp4Sh.gif)
+![sample](https://i.imgur.com/da0NXnf.gif)
