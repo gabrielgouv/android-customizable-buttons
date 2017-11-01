@@ -1,4 +1,4 @@
-![sample](https://i.imgur.com/Q8KSadp.png)
+![sample](https://i.imgur.com/BIGuL3j.png)
 Create an XML file that represents the button states? Create an XML file that represents each button state? No more. With Customizable Buttons for Android you can easily create custom buttons for your app!
 
 [WIP] Documentation soon.
