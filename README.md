@@ -3,4 +3,6 @@ Create an XML file that represents the button states? Create an XML file that re
 
 [WIP] Documentation soon.
 
-![sample](https://i.imgur.com/da0NXnf.gif)
+<p align="center">
+  <img src="https://i.imgur.com/FKsu7rS.gif">
+</p>
