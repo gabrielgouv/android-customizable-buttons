@@ -24,7 +24,7 @@ public class CustomizableButton extends AppCompatButton {
     public static final int DEFAULT_BORDER_COLOR = 0xff000000;
     public static final int DEFAULT_BORDER_THICKNESS = 0;
     public static final int DEFAULT_BORDER_RADIUS = 2;
-    public static final float DEFAULT_COLOR_FACTOR = 0.9f;
+    public static final float DEFAULT_COLOR_FACTOR = 0.8f;
     public static final int DEFAULT_DISABLED_BACKGROUND_COLOR = 0xffefefef;
     public static final int DEFAULT_DISABLED_TEXT_COLOR = 0xffbdbdbd;
     public static final int DEFAULT_DISABLED_BORDER_COLOR = 0xffcccccc;
@@ -155,6 +155,8 @@ public class CustomizableButton extends AppCompatButton {
 
     private void setupButton() {
 
+        this.setPadding(DimensionUtil.dipToPx(16), 0, DimensionUtil.dipToPx(16), 0);
+
         setButtonText();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -162,7 +164,7 @@ public class CustomizableButton extends AppCompatButton {
         }
 
 
-        if (mUseRippleEffect && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (mEnabled && mUseRippleEffect && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setButtonBackground(getRippleDrawable());
         } else {
             setButtonBackground(getButtonBackgrounds());
