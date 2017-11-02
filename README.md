@@ -17,9 +17,8 @@ In this basic example you can see how to easily create a custom button with ripp
 ### XML:
 ```XML
 <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"
         app:cb_text="Normal / Enabled"
         app:cb_textColor="#DAEBF2"
         app:cb_textAllCaps="true"
