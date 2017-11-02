@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
@@ -12,15 +13,18 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 
 
 public class CustomizableButton extends AppCompatButton {
 
+    public static final boolean DEFAULT_USE_RIPPLE_EFFECT = false;
+    public static final int DEFAULT_RIPPLE_COLOR = 0xff000000;
     public static final float DEFAULT_RIPPLE_OPACITY = 0.26f;
-    public static final int DEFAULT_TEXT_SIZE = 15;
-    public static final boolean DEFAULT_ALL_CAPS = false;
+    public static final int DEFAULT_TEXT_SIZE = 14;
+    public static final int DEFAULT_TEXT_STYLE = Typeface.NORMAL;
+    public static final boolean DEFAULT_TEXT_ALL_CAPS = false;
     public static final int DEFAULT_BACKGROUND_COLOR = 0xffcccccc;
-    public static final int DEFAULT_RIPPLE_COLOR = 0xffffffff;
     public static final int DEFAULT_BORDER_COLOR = 0xff000000;
     public static final int DEFAULT_BORDER_THICKNESS = 0;
     public static final int DEFAULT_BORDER_RADIUS = 2;
@@ -29,7 +33,6 @@ public class CustomizableButton extends AppCompatButton {
     public static final int DEFAULT_DISABLED_TEXT_COLOR = 0xffbdbdbd;
     public static final int DEFAULT_DISABLED_BORDER_COLOR = 0xffcccccc;
     public static final int DEFAULT_ELEVATION = 0;
-    public static final boolean DEFAULT_USE_RIPPLE_EFFECT = false;
     public static final boolean DEFAULT_BUTTON_ENABLED = true;
     public static final float DEFAULT_BACKGROUND_OPACITY = 1f;
 
@@ -39,10 +42,11 @@ public class CustomizableButton extends AppCompatButton {
 
     protected String mText;
     protected int mTextSize;
+    protected int mTextStyle;
     protected boolean mTextAllCaps;
     protected boolean mUseRippleEffect;
     protected int mRippleColor;
-    protected float mRippleAlpha;
+    protected float mRippleOpacity;
     protected boolean mEnabled;
     protected int mElevation;
 
@@ -71,7 +75,7 @@ public class CustomizableButton extends AppCompatButton {
 
         super(context);
         mContext = context;
-        initButton();
+        init();
 
     }
 
@@ -80,7 +84,7 @@ public class CustomizableButton extends AppCompatButton {
         super(context, attrs);
         mContext = context;
         mAttrs = attrs;
-        initButton();
+        init();
 
     }
 
@@ -90,15 +94,14 @@ public class CustomizableButton extends AppCompatButton {
         mContext = context;
         mAttrs = attrs;
         mDefStyleAttr = defStyleAttr;
-        initButton();
+        init();
 
     }
 
-    private void initButton() {
+    private void init() {
 
         initAttributes();
         setupButton();
-
     }
 
     /**
@@ -109,19 +112,7 @@ public class CustomizableButton extends AppCompatButton {
 
         TypedArray typedArray = mContext.obtainStyledAttributes(mAttrs, R.styleable.CustomizableButton, mDefStyleAttr, 0);
 
-        mText = typedArray.getString(R.styleable.CustomizableButton_cb_text);
-        if (mText == null)
-            mText = typedArray.getString(R.styleable.CustomizableButton_android_text);
-        mTextSize = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_textSize, DEFAULT_TEXT_SIZE);
-        mTextAllCaps = typedArray.getBoolean(R.styleable.CustomizableButton_cb_textAllCaps, DEFAULT_ALL_CAPS);
-        mEnabled = typedArray.getBoolean(R.styleable.CustomizableButton_android_enabled, DEFAULT_BUTTON_ENABLED);
-
-        mUseRippleEffect = typedArray.getBoolean(R.styleable.CustomizableButton_cb_useRippleEffect, DEFAULT_USE_RIPPLE_EFFECT);
-        mRippleColor = typedArray.getColor(R.styleable.CustomizableButton_cb_rippleColor, DEFAULT_RIPPLE_COLOR);
-        mRippleAlpha = typedArray.getFloat(R.styleable.CustomizableButton_cb_rippleOpacity, DEFAULT_RIPPLE_OPACITY);
-        mElevation = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_elevation, DEFAULT_ELEVATION);
-
-        // default
+        // normal state
         mBackgroundColor = typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColor, DEFAULT_BACKGROUND_COLOR);
         mBackgroundColorOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundColorOpacity, DEFAULT_BACKGROUND_OPACITY);
         mTextColor = typedArray.getColor(R.styleable.CustomizableButton_cb_textColor, ColorUtil.getTextColorFromBackgroundColor(mBackgroundColor));
@@ -129,7 +120,7 @@ public class CustomizableButton extends AppCompatButton {
         mBorderThickness = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThickness, DEFAULT_BORDER_THICKNESS);
         mBorderRadius = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadius, DEFAULT_BORDER_RADIUS);
 
-        // pressed
+        // pressed/focused state
         mBackgroundColorPressed = typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorPressed, ColorUtil.darkenLightenColor(mBackgroundColor, DEFAULT_COLOR_FACTOR));
         mBackgroundColorOpacityPressed = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundColorOpacityPressed, DEFAULT_BACKGROUND_OPACITY);
         mTextColorPressed = typedArray.getColor(R.styleable.CustomizableButton_cb_textColorPressed, ColorUtil.getTextColorFromBackgroundColor(mBackgroundColorPressed));
@@ -137,13 +128,30 @@ public class CustomizableButton extends AppCompatButton {
         mBorderThicknessPressed = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessPressed, mBorderThickness);
         mBorderRadiusPressed = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusPressed, mBorderRadius);
 
-        // disabled
+        // disabled state
         mBackgroundColorDisabled = typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorDisabled, DEFAULT_DISABLED_BACKGROUND_COLOR);
         mBackgroundColorOpacityDisabled = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundColorOpacityDisabled, DEFAULT_BACKGROUND_OPACITY);
         mTextColorDisabled = typedArray.getColor(R.styleable.CustomizableButton_cb_textColorDisabled, DEFAULT_DISABLED_TEXT_COLOR);
         mBorderColorDisabled = typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorDisabled, DEFAULT_DISABLED_BORDER_COLOR);
         mBorderThicknessDisabled = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessDisabled, mBorderThickness);
         mBorderRadiusDisabled = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusDisabled, mBorderRadius);
+
+        // general
+        mEnabled = typedArray.getBoolean(R.styleable.CustomizableButton_cb_enabled, DEFAULT_BUTTON_ENABLED);
+        mEnabled = typedArray.getBoolean(R.styleable.CustomizableButton_android_enabled, mEnabled);
+        mText = typedArray.getString(R.styleable.CustomizableButton_cb_text);
+        if (mText == null)
+            mText = typedArray.getString(R.styleable.CustomizableButton_android_text);
+        mTextSize = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_textSize, DEFAULT_TEXT_SIZE);
+        mTextSize = (int) typedArray.getDimension(R.styleable.CustomizableButton_android_textSize, mTextSize);
+        mTextStyle = typedArray.getInt(R.styleable.CustomizableButton_cb_textStyle, DEFAULT_TEXT_STYLE);
+        mTextStyle = typedArray.getInt(R.styleable.CustomizableButton_android_textStyle, mTextStyle);
+        mTextAllCaps = typedArray.getBoolean(R.styleable.CustomizableButton_cb_textAllCaps, DEFAULT_TEXT_ALL_CAPS);
+        mTextAllCaps = typedArray.getBoolean(R.styleable.CustomizableButton_android_textAllCaps, mTextAllCaps);
+        mUseRippleEffect = typedArray.getBoolean(R.styleable.CustomizableButton_cb_useRippleEffect, DEFAULT_USE_RIPPLE_EFFECT);
+        mRippleColor = typedArray.getColor(R.styleable.CustomizableButton_cb_rippleColor, DEFAULT_RIPPLE_COLOR);
+        mRippleOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_rippleOpacity, DEFAULT_RIPPLE_OPACITY);
+        mElevation = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_elevation, DEFAULT_ELEVATION);
 
         typedArray.recycle();
 
@@ -155,14 +163,17 @@ public class CustomizableButton extends AppCompatButton {
 
     private void setupButton() {
 
+        this.setEnabled(mEnabled);
         this.setPadding(DimensionUtil.dipToPx(16), 0, DimensionUtil.dipToPx(16), 0);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            setElevation(mElevation);
 
         setButtonText();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setStateListAnimator(null);
         }
-
 
         if (mEnabled && mUseRippleEffect && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setButtonBackground(getRippleDrawable());
@@ -173,8 +184,8 @@ public class CustomizableButton extends AppCompatButton {
     }
 
     /**
-     * @param drawable
      * Set button background for all APIs
+     * @param drawable
      */
 
     private void setButtonBackground(Drawable drawable) {
@@ -196,9 +207,11 @@ public class CustomizableButton extends AppCompatButton {
         this.setTextColor(getButtonTextColors());
         this.setAllCaps(mTextAllCaps);
         this.setText(mText);
-        this.setTextSize(mTextSize);
+        this.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize);
+        this.setTypeface(this.getTypeface(), mTextStyle);
 
     }
+
 
     /**
      * Setup the button for normal state
@@ -213,9 +226,6 @@ public class CustomizableButton extends AppCompatButton {
 
         drawableDefault.setStroke(mBorderThickness, mBorderColor);
         drawableDefault.setColor(ColorUtil.useOpacity(mBackgroundColor, mBackgroundColorOpacity));
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            setElevation(mElevation);
 
         return drawableDefault;
 
@@ -235,9 +245,6 @@ public class CustomizableButton extends AppCompatButton {
         drawablePressed.setStroke(mBorderThicknessPressed, mBorderColorPressed);
         drawablePressed.setColor(ColorUtil.useOpacity(mBackgroundColorPressed, mBackgroundColorOpacityPressed));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            setElevation(mElevation);
-
         return drawablePressed;
 
     }
@@ -253,12 +260,8 @@ public class CustomizableButton extends AppCompatButton {
         drawableDisabled.setCornerRadii(new float[] {mBorderRadiusDisabled, mBorderRadiusDisabled, mBorderRadiusDisabled, mBorderRadiusDisabled,
                 mBorderRadiusDisabled, mBorderRadiusDisabled, mBorderRadiusDisabled, mBorderRadiusDisabled});
 
-
         drawableDisabled.setStroke(mBorderThicknessDisabled, mBorderColorDisabled);
         drawableDisabled.setColor(ColorUtil.useOpacity(mBackgroundColorDisabled, mBackgroundColorOpacityDisabled));
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            setElevation(mElevation);
 
         return drawableDisabled;
 
@@ -299,8 +302,8 @@ public class CustomizableButton extends AppCompatButton {
     }
 
     /**
-     * @return RippleDrawable
      * Create Ripple Effect for the button
+     * @return Ripple effect
      */
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -319,7 +322,7 @@ public class CustomizableButton extends AppCompatButton {
         if (mUseRippleEffect && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
             mRippleColor = mBackgroundColorPressed;
 
-        return new RippleDrawable(ColorUtil.getRippleColorFromColor(mRippleColor, mRippleAlpha), drawableDefault, mask);
+        return new RippleDrawable(ColorUtil.getRippleColorFromColor(mRippleColor, mRippleOpacity), drawableDefault, mask);
 
     }
 

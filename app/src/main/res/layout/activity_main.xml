@@ -5,159 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     android:background="#ffffff"
+    android:weightSum="1"
     tools:context="com.github.gabrielgouv.androidcustomizablebuttons.MainActivity">
 
-    <ScrollView
+    <com.github.gabrielgouv.customizablebuttons.CustomizableButton
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        app:cb_text="Customizable Button"
+        app:cb_useRippleEffect="true"
+        app:cb_rippleColor="@color/colorAccent"
+        app:cb_rippleOpacity="1"
+        app:cb_elevation="4dp"
+        app:cb_backgroundColor="#5758FF"
+        app:cb_borderRadius="30dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <Space
+        android:layout_width="16dp"
+        android:layout_height="16dp" />
 
-            <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cb_text="Button Example 1"
-                app:cb_elevation="4dp"
-                app:cb_backgroundColor="#8e24aa"/>
+    <com.github.gabrielgouv.customizablebuttons.CustomizableButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cb_text="Customizable Button"
+        app:cb_useRippleEffect="true"
+        app:cb_rippleColor="#ffffff"
+        app:cb_rippleOpacity="0.5"
+        app:cb_elevation="4dp"
+        app:cb_backgroundColor="#E54C65"
+        app:cb_borderRadius="10dp"/>
 
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="8dp" />
+    <Space
+        android:layout_width="16dp"
+        android:layout_height="16dp" />
 
-            <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cb_text="Button Example 2"
-                app:cb_useRippleEffect="true"
-                app:cb_rippleOpacity="1"
-                app:cb_backgroundColor="#e53935"
-                app:cb_borderRadius="5dp"/>
+    <com.github.gabrielgouv.customizablebuttons.CustomizableButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cb_text="Customizable Button"
+        app:cb_textColor="#8715FF"
+        app:cb_useRippleEffect="true"
+        app:cb_backgroundColorOpacity="0"
+        app:cb_rippleColor="#8715FF"
+        app:cb_borderColor="#8715FF"
+        app:cb_borderThickness="2dp"
+        app:cb_borderRadius="10dp"/>
 
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="8dp" />
+    <Space
+        android:layout_width="16dp"
+        android:layout_height="16dp" />
 
-            <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cb_text="Button Example 3"
-                android:enabled="false"
-                app:cb_borderColor="@color/colorAccent"
-                app:cb_useRippleEffect="true"
-                app:cb_borderRadius="15dp"/>
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="8dp" />
-
-            <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cb_text="Button Example 4"
-                app:cb_backgroundColor="#66bb6a"
-                app:cb_backgroundColorPressed="#1b5e20"
-                app:cb_borderThickness="2dp"
-                app:cb_borderColor="#338a3e"/>
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="8dp" />
-
-            <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cb_text="Button Example 5"
-                app:cb_useRippleEffect="true"
-                app:cb_rippleColor="#1b5e20"
-                app:cb_rippleOpacity="0.8"
-                app:cb_backgroundColor="#66bb6a"
-                app:cb_backgroundColorOpacity="0.2"
-                app:cb_borderThickness="2dp"
-                app:cb_borderColor="#338a3e"
-                app:cb_borderRadius="30dp"/>
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="8dp" />
-
-            <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cb_text="Button Example 6"
-                app:cb_textColor="#1a237e"
-                app:cb_useRippleEffect="true"
-                app:cb_rippleColor="#1a237e"
-                app:cb_backgroundColor="#66bb6a"
-                app:cb_backgroundColorOpacity="0"
-                app:cb_borderThickness="2dp"
-                app:cb_borderColor="#1a237e"
-                app:cb_borderRadius="30dp"/>
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="8dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#404040"
-                android:padding="16dp">
-
-                <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cb_text="Button Example 7"
-                    app:cb_textColor="#ffee58"
-                    app:cb_useRippleEffect="true"
-                    app:cb_rippleOpacity="0.6"
-                    app:cb_rippleColor="#ffee58"
-                    app:cb_backgroundColorOpacity="0"
-                    app:cb_borderThickness="2dp"
-                    app:cb_borderColor="#ffee58"
-                    app:cb_borderRadius="30dp"/>
-
-            </LinearLayout>
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="8dp" />
-
-            <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cb_text="Button Example 6"
-                app:cb_useRippleEffect="true"
-                app:cb_rippleColor="#ab47bc"
-                app:cb_rippleOpacity="1"
-                app:cb_backgroundColor="#ffeb3b"
-                app:cb_borderRadius="10dp"/>
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="8dp" />
-
-            <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cb_text="Button Example 6"
-                app:cb_textColor="#ff5722"
-                app:cb_useRippleEffect="true"
-                app:cb_rippleColor="#1e88e5"
-                app:cb_rippleOpacity="1"
-                app:cb_backgroundColorOpacity="0"
-                app:cb_borderRadius="30dp"/>
-
-        </LinearLayout>
-
-
-
-    </ScrollView>
-
-
+    <com.github.gabrielgouv.customizablebuttons.CustomizableButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cb_text="Customizable Button"
+        app:cb_enabled="false"
+        app:cb_useRippleEffect="true"
+        app:cb_rippleColor="#ffffff"
+        app:cb_rippleOpacity="0.5"
+        app:cb_backgroundColor="#E54C65"
+        app:cb_borderRadius="10dp"/>
 
 </LinearLayout>
