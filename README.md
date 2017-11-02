@@ -12,7 +12,7 @@ Create an XML file that represents the button states? Create an XML file that re
 
 ## Basic Example
 
-In this basic example you can see how to easily create a custom button with ripple effect. Check the wiki (soon) for more examples.
+In this basic example you can see how to easily create a custom button with ripple effect. Check the Wiki (soon) for more examples.
 
 ### Code:
 ```XML
@@ -34,7 +34,7 @@ In this basic example you can see how to easily create a custom button with ripp
         app:cb_borderRadius="30dp" />
 ```
 
-You can use `android:enabled="false"` or `app:cb_enabled="false"` to set your button disabled. You can check the wiki (soon) for more information about attributes.
+You can use `android:enabled="false"` or `app:cb_enabled="false"` to set your button disabled. You can check the [**Button Attributes**](https://github.com/GabrielGouv/Android-Customizable-Buttons/wiki/Button-Attributes) for more information about attributes.
 
 ### Result:
 ![sample](https://i.imgur.com/AgpE30d.gif)
