@@ -1,4 +1,17 @@
 ![sample](https://i.imgur.com/OJ2qtWT.png)
+
+<p align="center">
+  
+  <a href="https://android-arsenal.com/api?level=14">
+    <img src="https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat"
+  alt="Gratipay"></a>
+  
+  <a href="https://travis-ci.org/GabrielGouv/Android-Customizable-Buttons">
+    <img src="https://travis-ci.org/GabrielGouv/Android-Customizable-Buttons.svg?branch=master"
+  alt="Gratipay"></a>
+
+ </p>
+
 Create an XML file that represents the button states? Create an XML file that represents each button state? No more. With Customizable Buttons for Android you can easily create custom buttons for your app!
 
 **NOTE:** This is a work in progress and is not recommended to use in your project yet. The documentation and plugin repository will be added soon, when the project reaches a more mature stage.
