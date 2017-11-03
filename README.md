@@ -33,7 +33,7 @@ In this basic example you can see how to easily create a custom button with ripp
         app:cb_borderRadius="30dp" />
 ```
 
-You can use `android:enabled="false"` or `app:cb_enabled="false"` to set your button disabled. You can check the [**Button Attributes**](https://github.com/GabrielGouv/Android-Customizable-Buttons/wiki/Button-Attributes) for more information about attributes.
+You can use `android:enabled="false"` or `app:cb_enabled="false"` to set your button disabled. You can check the [**Button XML Attributes**](https://github.com/GabrielGouv/Android-Customizable-Buttons/wiki/Button-Attributes) for more information about attributes.
 
 ### Result:
 ![sample](https://i.imgur.com/AgpE30d.gif)
