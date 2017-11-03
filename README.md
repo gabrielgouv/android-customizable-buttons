@@ -9,7 +9,11 @@
   <a href="https://travis-ci.org/GabrielGouv/Android-Customizable-Buttons">
     <img src="https://travis-ci.org/GabrielGouv/Android-Customizable-Buttons.svg?branch=master"
   alt="Gratipay"></a>
-
+  
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg"
+  alt="Gratipay"></a>
+  
  </p>
 
 <br>
