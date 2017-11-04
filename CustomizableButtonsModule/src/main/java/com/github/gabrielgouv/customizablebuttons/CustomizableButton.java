@@ -11,16 +11,17 @@ import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
+import com.github.gabrielgouv.customizablebuttons.attribute.DrawableAttributes;
+import com.github.gabrielgouv.customizablebuttons.attribute.RippleAttributes;
 import com.github.gabrielgouv.customizablebuttons.util.ColorUtil;
 import com.github.gabrielgouv.customizablebuttons.util.DimensionUtil;
 import com.github.gabrielgouv.customizablebuttons.util.DrawableFactory;
 
 
-public class CustomizableButton extends AppCompatButton {
+public class CustomizableButton extends BaseButton {
 
     public static final boolean DEFAULT_USE_RIPPLE_EFFECT = false;
     public static final int DEFAULT_RIPPLE_COLOR = 0xff000000;
@@ -40,10 +41,6 @@ public class CustomizableButton extends AppCompatButton {
     public static final boolean DEFAULT_BUTTON_ENABLED = true;
     public static final float DEFAULT_BACKGROUND_OPACITY = 1f;
 
-    protected Context mContext;
-    protected AttributeSet mAttrs;
-    protected int mDefStyleAttr;
-
     protected String mText;
     protected int mTextSize;
     protected int mTextStyle;
@@ -52,45 +49,30 @@ public class CustomizableButton extends AppCompatButton {
     protected int mTextColorDisabled;
 
     protected boolean mTextAllCaps;
-    protected boolean mUseRippleEffect;
-    protected int mRippleColor;
-    protected float mRippleOpacity;
+
     protected boolean mEnabled;
     protected int mElevation;
+
+    protected RippleAttributes mRippleAttributes;
 
     protected DrawableAttributes mDrawableNormal;
     protected DrawableAttributes mDrawablePressed;
     protected DrawableAttributes mDrawableDisabled;
 
     public CustomizableButton(Context context) {
-
         super(context);
-        mContext = context;
-        init();
-
     }
 
     public CustomizableButton(Context context, AttributeSet attrs) {
-
         super(context, attrs);
-        mContext = context;
-        mAttrs = attrs;
-        init();
-
     }
 
     public CustomizableButton(Context context, AttributeSet attrs, int defStyleAttr) {
-
         super(context, attrs, defStyleAttr);
-        mContext = context;
-        mAttrs = attrs;
-        mDefStyleAttr = defStyleAttr;
-        init();
-
     }
 
-    private void init() {
-
+    @Override
+    protected void init() {
         initAttributes();
         setupButton();
     }
@@ -99,15 +81,12 @@ public class CustomizableButton extends AppCompatButton {
      * Initialize attributes
      */
 
-    protected void initAttributes() {
-
-        mDrawableNormal = new DrawableAttributes();
-        mDrawablePressed = new DrawableAttributes();
-        mDrawableDisabled = new DrawableAttributes();
+    private void initAttributes() {
 
         TypedArray typedArray = mContext.obtainStyledAttributes(mAttrs, R.styleable.CustomizableButton, mDefStyleAttr, 0);
 
         // normal state
+        mDrawableNormal = new DrawableAttributes();
         mDrawableNormal.setBackgroundColor(typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorNormal, DEFAULT_BACKGROUND_COLOR));
         mDrawableNormal.setBackgroundOpacity(typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityNormal, DEFAULT_BACKGROUND_OPACITY));
         mDrawableNormal.setBorderColor(typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorNormal, DEFAULT_BORDER_COLOR));
@@ -117,6 +96,7 @@ public class CustomizableButton extends AppCompatButton {
 
 
         // pressed/focused state
+        mDrawablePressed = new DrawableAttributes();
         mDrawablePressed.setBackgroundColor(typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorPressed, ColorUtil.darkenLightenColor(mDrawableNormal.getBackgroundColor(), DEFAULT_COLOR_FACTOR)));
         mDrawablePressed.setBackgroundOpacity(typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityPressed, DEFAULT_BACKGROUND_OPACITY));
         mDrawablePressed.setBorderColor(typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorPressed, mDrawableNormal.getBackgroundColor()));
@@ -126,6 +106,7 @@ public class CustomizableButton extends AppCompatButton {
 
 
         // disabled state
+        mDrawableDisabled = new DrawableAttributes();
         mDrawableDisabled.setBackgroundColor(typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorDisabled, DEFAULT_DISABLED_BACKGROUND_COLOR));
         mDrawableDisabled.setBackgroundOpacity(typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityDisabled, DEFAULT_BACKGROUND_OPACITY));
         mDrawableDisabled.setBorderColor(typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorDisabled, DEFAULT_DISABLED_BORDER_COLOR));
@@ -145,10 +126,13 @@ public class CustomizableButton extends AppCompatButton {
         mTextStyle = typedArray.getInt(R.styleable.CustomizableButton_android_textStyle, mTextStyle);
         mTextAllCaps = typedArray.getBoolean(R.styleable.CustomizableButton_cb_textAllCaps, DEFAULT_TEXT_ALL_CAPS);
         mTextAllCaps = typedArray.getBoolean(R.styleable.CustomizableButton_android_textAllCaps, mTextAllCaps);
-        mUseRippleEffect = typedArray.getBoolean(R.styleable.CustomizableButton_cb_useRippleEffect, DEFAULT_USE_RIPPLE_EFFECT);
-        mRippleColor = typedArray.getColor(R.styleable.CustomizableButton_cb_rippleColor, DEFAULT_RIPPLE_COLOR);
-        mRippleOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_rippleOpacity, DEFAULT_RIPPLE_OPACITY);
+
         mElevation = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_elevation, DEFAULT_ELEVATION);
+
+        mRippleAttributes = new RippleAttributes();
+        mRippleAttributes.setUseRippleEffect(typedArray.getBoolean(R.styleable.CustomizableButton_cb_useRippleEffect, DEFAULT_USE_RIPPLE_EFFECT));
+        mRippleAttributes.setRippleColor(typedArray.getColor(R.styleable.CustomizableButton_cb_rippleColor, DEFAULT_RIPPLE_COLOR));
+        mRippleAttributes.setRippleOpacity(typedArray.getFloat(R.styleable.CustomizableButton_cb_rippleOpacity, DEFAULT_RIPPLE_OPACITY));
 
         typedArray.recycle();
 
@@ -170,7 +154,7 @@ public class CustomizableButton extends AppCompatButton {
 
         setButtonText();
 
-        if (mEnabled && mUseRippleEffect && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (mEnabled && mRippleAttributes.isUseRippleEffect() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setButtonBackground(getRippleDrawable());
         } else {
             setButtonBackground(getButtonBackgrounds());
@@ -225,7 +209,7 @@ public class CustomizableButton extends AppCompatButton {
 
     private ColorStateList getButtonTextColors() {
 
-        if (mUseRippleEffect && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (mRippleAttributes.isUseRippleEffect() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             mTextColorPressed = mTextColorNormal;
 
         return new ColorStateList(
@@ -264,10 +248,10 @@ public class CustomizableButton extends AppCompatButton {
             mask.setColor(Color.WHITE);
         }
 
-        if (mUseRippleEffect && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-            mRippleColor = mDrawablePressed.getBackgroundColor();
+        if (mRippleAttributes.isUseRippleEffect() && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+            mRippleAttributes.setRippleColor(mDrawablePressed.getBackgroundColor());
 
-        return new RippleDrawable(ColorUtil.getRippleColorFromColor(mRippleColor, mRippleOpacity), drawableNormal, mask);
+        return new RippleDrawable(ColorUtil.getRippleColorFromColor(mRippleAttributes.getRippleColor(), mRippleAttributes.getRippleOpacity()), drawableNormal, mask);
 
     }
 

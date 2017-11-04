@@ -3,7 +3,7 @@ package com.github.gabrielgouv.customizablebuttons.util;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 
-import com.github.gabrielgouv.customizablebuttons.DrawableAttributes;
+import com.github.gabrielgouv.customizablebuttons.attribute.DrawableAttributes;
 
 
 public final class DrawableFactory {
