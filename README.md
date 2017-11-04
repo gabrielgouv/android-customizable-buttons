@@ -3,16 +3,13 @@
 <p align="center">
   
   <a href="https://android-arsenal.com/api?level=14">
-    <img src="https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat"
-  alt="Gratipay"></a>
+    <img src="https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat" alt="Gratipay"></a>
   
   <a href="https://travis-ci.org/GabrielGouv/Android-Customizable-Buttons">
-    <img src="https://travis-ci.org/GabrielGouv/Android-Customizable-Buttons.svg?branch=master"
-  alt="Gratipay"></a>
+    <img src="https://travis-ci.org/GabrielGouv/Android-Customizable-Buttons.svg?branch=master" alt="Gratipay"></a>
   
   <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-yellow.svg"
-  alt="Gratipay"></a>
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="Gratipay"></a>
   
   <a href="https://www.codacy.com/app/GabrielGouv/Android-Customizable-Buttons?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GabrielGouv/Android-Customizable-Buttons&amp;utm_campaign=Badge_Grade">
   <img src="https://api.codacy.com/project/badge/Grade/20a52dd334204b64a361d313435e5a1c"/></a>
@@ -40,17 +37,17 @@ In this basic example you can see how to easily create a custom button with ripp
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cb_text="Normal / Enabled"
-        app:cb_textColor="#DAEBF2"
+        app:cb_textColorNormal="#DAEBF2"
         app:cb_textAllCaps="true"
         app:cb_elevation="4dp"
         app:cb_useRippleEffect="true"
         app:cb_rippleColor="#012C40"
         app:cb_rippleOpacity="1"
-        app:cb_backgroundColor="#00708C"
+        app:cb_backgroundColorNormal="#00708C"
         app:cb_backgroundColorPressed="#012C40"
-        app:cb_borderColor="#012C40"
-        app:cb_borderThickness="2dp"
-        app:cb_borderRadius="30dp" />
+        app:cb_borderColorNormal="#012C40"
+        app:cb_borderThicknessNormal="2dp"
+        app:cb_borderRadiusNormal="30dp" />
 ```
 
 You can use `android:enabled="false"` or `app:cb_enabled="false"` to set your button disabled. You can check the [**Button XML Attributes**](https://github.com/GabrielGouv/Android-Customizable-Buttons/wiki/Button-XML-Attributes) for more information about attributes.
