@@ -15,6 +15,9 @@ import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
+import com.github.gabrielgouv.customizablebuttons.util.ColorUtil;
+import com.github.gabrielgouv.customizablebuttons.util.DimensionUtil;
+
 
 public class CustomizableButton extends AppCompatButton {
 
@@ -154,18 +157,6 @@ public class CustomizableButton extends AppCompatButton {
         mElevation = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_elevation, DEFAULT_ELEVATION);
 
         typedArray.recycle();
-
-    }
-
-    private void initNormalStateAttributes(TypedArray typedArray) {
-
-    }
-
-    private void initPressedStateAttributes(TypedArray typedArray) {
-
-    }
-
-    private void initDisabledStateAttributes(TypedArray typedArray) {
 
     }
 

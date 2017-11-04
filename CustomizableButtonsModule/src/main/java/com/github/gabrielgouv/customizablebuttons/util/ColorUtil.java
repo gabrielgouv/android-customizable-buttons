@@ -1,19 +1,18 @@
-package com.github.gabrielgouv.customizablebuttons;
+package com.github.gabrielgouv.customizablebuttons.util;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.util.Log;
 
 
 public final class ColorUtil {
 
-    static ColorStateList getRippleColorFromColor(int color, float opacity) {
+    public static ColorStateList getRippleColorFromColor(int color, float opacity) {
 
         return ColorStateList.valueOf(useOpacity(color, opacity));
 
     }
 
-    static int darkenLightenColor(int color, float factor) {
+    public static int darkenLightenColor(int color, float factor) {
 
         return Color.argb(Color.alpha(color),
                 Math.min(Math.round(Color.red(color) * factor), 255),
@@ -22,7 +21,7 @@ public final class ColorUtil {
 
     }
 
-    static int useOpacity(int color, float opacity) {
+    public static int useOpacity(int color, float opacity) {
 
         return Color.argb(Math.min(Math.round(opacity * 255), 255),
                 Math.min(Math.round(Color.red(color)), 255),
@@ -38,7 +37,7 @@ public final class ColorUtil {
      * @param color
      * @return true if the color is dark or false if light
      */
-    static boolean isDarkColor(int color) {
+    public static boolean isDarkColor(int color) {
 
         float r = Color.red(color) / 255f;
         float g = Color.green(color) / 255f;
@@ -50,7 +49,7 @@ public final class ColorUtil {
 
     }
 
-    static int getTextColorFromBackgroundColor(int color) {
+    public static int getTextColorFromBackgroundColor(int color) {
 
         return isDarkColor(color) ? Color.WHITE : Color.BLACK;
 

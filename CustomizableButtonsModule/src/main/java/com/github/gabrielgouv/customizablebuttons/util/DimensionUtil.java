@@ -1,4 +1,4 @@
-package com.github.gabrielgouv.customizablebuttons;
+package com.github.gabrielgouv.customizablebuttons.util;
 
 import android.content.res.Resources;
 
