@@ -169,7 +169,7 @@ public class CustomizableButton extends BaseButton {
         this.setAllCaps(mTextAllCaps);
         this.setText(mText);
         this.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize);
-        this.setTypeface(this.getTypeface(), mTextStyle);
+        setTextStyle(mTextStyle);
 
     }
 
@@ -398,6 +398,18 @@ public class CustomizableButton extends BaseButton {
             mDrawableDisabled.setBorderRadius(radius);
             setupButton();
         }
+    }
+
+    public int getTextStyle() {
+        return mTextStyle;
+    }
+
+    public void setTextStyle(int textStyle) {
+        this.setTypeface(this.getTypeface(), textStyle);
+    }
+
+    public boolean isTextAllCaps() {
+        return mTextAllCaps;
     }
 
 }
