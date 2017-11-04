@@ -12,8 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnTeste.text = "teste"
-        btnTeste.backgroundColorNormal = Color.BLACK
+        btnTest.text = "teste"
+        btnTest.backgroundColorNormal = Color.BLACK
 
         supportActionBar!!.title = "Customizable Buttons (API " + Build.VERSION.SDK_INT + ")"
 

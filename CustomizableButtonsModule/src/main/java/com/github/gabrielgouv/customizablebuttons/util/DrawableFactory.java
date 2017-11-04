@@ -3,18 +3,22 @@ package com.github.gabrielgouv.customizablebuttons.util;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 
+import com.github.gabrielgouv.customizablebuttons.DrawableAttributes;
+
 
 public final class DrawableFactory {
 
-    public static Drawable getBackgroundDrawable(float cornerRadius, int borderThickness, int borderColor, int backgroundColor, float backgroundOpacity) {
+    public static Drawable getBackgroundDrawable(DrawableAttributes drawableAttributes) {
 
         GradientDrawable drawable = new GradientDrawable();
+
+        float cornerRadius = drawableAttributes.getBorderRadius();
 
         drawable.setCornerRadii(new float[] {cornerRadius, cornerRadius, cornerRadius, cornerRadius,
                 cornerRadius, cornerRadius, cornerRadius, cornerRadius});
 
-        drawable.setStroke(borderThickness, borderColor);
-        drawable.setColor(ColorUtil.useOpacity(backgroundColor, backgroundOpacity));
+        drawable.setStroke(drawableAttributes.getBorderThickness(), drawableAttributes.getBorderColor());
+        drawable.setColor(ColorUtil.useOpacity(drawableAttributes.getBackgroundColor(), drawableAttributes.getBackgroundOpacity()));
 
         return drawable;
 

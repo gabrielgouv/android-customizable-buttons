@@ -11,7 +11,7 @@
     tools:context="com.github.gabrielgouv.androidcustomizablebuttons.MainActivity">
 
     <com.github.gabrielgouv.customizablebuttons.CustomizableButton
-        android:id="@+id/btnTeste"
+        android:id="@+id/btnTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cb_text="Customizable Button"

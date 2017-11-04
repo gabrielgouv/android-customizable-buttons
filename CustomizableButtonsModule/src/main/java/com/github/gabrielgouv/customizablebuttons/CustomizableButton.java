@@ -47,6 +47,10 @@ public class CustomizableButton extends AppCompatButton {
     protected String mText;
     protected int mTextSize;
     protected int mTextStyle;
+    protected int mTextColorNormal;
+    protected int mTextColorPressed;
+    protected int mTextColorDisabled;
+
     protected boolean mTextAllCaps;
     protected boolean mUseRippleEffect;
     protected int mRippleColor;
@@ -54,30 +58,9 @@ public class CustomizableButton extends AppCompatButton {
     protected boolean mEnabled;
     protected int mElevation;
 
-    protected int mTextColorNormal;
-    protected int mBackgroundColorNormal;
-    protected float mBackgroundOpacityNormal;
-    protected int mBorderColorNormal;
-    protected int mBorderThicknessNormal;
-    protected int mBorderRadiusNormal;
-
-    protected int mTextColorPressed;
-    protected int mBackgroundColorPressed;
-    protected float mBackgroundOpacityPressed;
-    protected int mBorderColorPressed;
-    protected int mBorderThicknessPressed;
-    protected int mBorderRadiusPressed;
-
-    protected int mTextColorDisabled;
-    protected int mBackgroundColorDisabled;
-    protected float mBackgroundOpacityDisabled;
-    protected int mBorderColorDisabled;
-    protected int mBorderThicknessDisabled;
-    protected int mBorderRadiusDisabled;
-
-    private Drawable mDrawableNormal;
-    private Drawable mDrawablePressed;
-    private Drawable mDrawableDisabled;
+    protected DrawableAttributes mDrawableNormal;
+    protected DrawableAttributes mDrawablePressed;
+    protected DrawableAttributes mDrawableDisabled;
 
     public CustomizableButton(Context context) {
 
@@ -118,31 +101,37 @@ public class CustomizableButton extends AppCompatButton {
 
     protected void initAttributes() {
 
+        mDrawableNormal = new DrawableAttributes();
+        mDrawablePressed = new DrawableAttributes();
+        mDrawableDisabled = new DrawableAttributes();
+
         TypedArray typedArray = mContext.obtainStyledAttributes(mAttrs, R.styleable.CustomizableButton, mDefStyleAttr, 0);
 
         // normal state
-        mBackgroundColorNormal = typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorNormal, DEFAULT_BACKGROUND_COLOR);
-        mBackgroundOpacityNormal = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityNormal, DEFAULT_BACKGROUND_OPACITY);
-        mTextColorNormal = typedArray.getColor(R.styleable.CustomizableButton_cb_textColorNormal, ColorUtil.getTextColorFromBackgroundColor(mBackgroundColorNormal));
-        mBorderColorNormal = typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorNormal, DEFAULT_BORDER_COLOR);
-        mBorderThicknessNormal = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessNormal, DEFAULT_BORDER_THICKNESS);
-        mBorderRadiusNormal = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusNormal, DEFAULT_BORDER_RADIUS);
+        mDrawableNormal.setBackgroundColor(typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorNormal, DEFAULT_BACKGROUND_COLOR));
+        mDrawableNormal.setBackgroundOpacity(typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityNormal, DEFAULT_BACKGROUND_OPACITY));
+        mDrawableNormal.setBorderColor(typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorNormal, DEFAULT_BORDER_COLOR));
+        mDrawableNormal.setBorderThickness((int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessNormal, DEFAULT_BORDER_THICKNESS));
+        mDrawableNormal.setBorderRadius((int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusNormal, DEFAULT_BORDER_RADIUS));
+        mTextColorNormal = typedArray.getColor(R.styleable.CustomizableButton_cb_textColorNormal, ColorUtil.getTextColorFromBackgroundColor(mDrawableNormal.getBackgroundColor()));
+
 
         // pressed/focused state
-        mBackgroundColorPressed = typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorPressed, ColorUtil.darkenLightenColor(mBackgroundColorNormal, DEFAULT_COLOR_FACTOR));
-        mBackgroundOpacityPressed = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityPressed, DEFAULT_BACKGROUND_OPACITY);
-        mTextColorPressed = typedArray.getColor(R.styleable.CustomizableButton_cb_textColorPressed, ColorUtil.getTextColorFromBackgroundColor(mBackgroundColorPressed));
-        mBorderColorPressed = typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorPressed, mBorderColorNormal);
-        mBorderThicknessPressed = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessPressed, mBorderThicknessNormal);
-        mBorderRadiusPressed = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusPressed, mBorderRadiusNormal);
+        mDrawablePressed.setBackgroundColor(typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorPressed, ColorUtil.darkenLightenColor(mDrawableNormal.getBackgroundColor(), DEFAULT_COLOR_FACTOR)));
+        mDrawablePressed.setBackgroundOpacity(typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityPressed, DEFAULT_BACKGROUND_OPACITY));
+        mDrawablePressed.setBorderColor(typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorPressed, mDrawableNormal.getBackgroundColor()));
+        mDrawablePressed.setBorderThickness((int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessPressed, mDrawableNormal.getBorderThickness()));
+        mDrawablePressed.setBorderRadius((int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusPressed, mDrawableNormal.getBorderRadius()));
+        mTextColorPressed = typedArray.getColor(R.styleable.CustomizableButton_cb_textColorPressed, ColorUtil.getTextColorFromBackgroundColor(mDrawablePressed.getBackgroundColor()));
+
 
         // disabled state
-        mBackgroundColorDisabled = typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorDisabled, DEFAULT_DISABLED_BACKGROUND_COLOR);
-        mBackgroundOpacityDisabled = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityDisabled, DEFAULT_BACKGROUND_OPACITY);
+        mDrawableDisabled.setBackgroundColor(typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorDisabled, DEFAULT_DISABLED_BACKGROUND_COLOR));
+        mDrawableDisabled.setBackgroundOpacity(typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityDisabled, DEFAULT_BACKGROUND_OPACITY));
+        mDrawableDisabled.setBorderColor(typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorDisabled, DEFAULT_DISABLED_BORDER_COLOR));
+        mDrawableDisabled.setBorderThickness((int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessDisabled, mDrawableNormal.getBorderThickness()));
+        mDrawableDisabled.setBorderRadius((int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusDisabled, mDrawableNormal.getBorderRadius()));
         mTextColorDisabled = typedArray.getColor(R.styleable.CustomizableButton_cb_textColorDisabled, DEFAULT_DISABLED_TEXT_COLOR);
-        mBorderColorDisabled = typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorDisabled, DEFAULT_DISABLED_BORDER_COLOR);
-        mBorderThicknessDisabled = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessDisabled, mBorderThicknessNormal);
-        mBorderRadiusDisabled = (int) typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusDisabled, mBorderRadiusNormal);
 
         // general
         mEnabled = typedArray.getBoolean(R.styleable.CustomizableButton_cb_enabled, DEFAULT_BUTTON_ENABLED);
@@ -220,21 +209,16 @@ public class CustomizableButton extends AppCompatButton {
 
     private Drawable getButtonBackgrounds() {
 
-        mDrawableNormal = DrawableFactory.getBackgroundDrawable(mBorderRadiusNormal, mBorderThicknessNormal, mBorderColorNormal,
-                mBackgroundColorNormal, mBackgroundOpacityNormal);
-
-        mDrawablePressed = DrawableFactory.getBackgroundDrawable(mBorderRadiusPressed, mBorderThicknessPressed, mBorderColorPressed,
-                mBackgroundColorPressed, mBackgroundOpacityPressed);
-
-        mDrawableDisabled = DrawableFactory.getBackgroundDrawable(mBorderRadiusDisabled, mBorderThicknessDisabled, mBorderColorDisabled,
-                mBackgroundColorDisabled, mBackgroundOpacityDisabled);
+        Drawable drawableNormal = DrawableFactory.getBackgroundDrawable(mDrawableNormal);
+        Drawable drawablePressed = DrawableFactory.getBackgroundDrawable(mDrawablePressed);
+        Drawable drawableDisabled = DrawableFactory.getBackgroundDrawable(mDrawableDisabled);
 
         StateListDrawable states = new StateListDrawable();
 
-        states.addState(new int[] {android.R.attr.state_pressed, android.R.attr.state_enabled}, mDrawablePressed);
-        states.addState(new int[] {android.R.attr.state_focused, android.R.attr.state_enabled}, mDrawablePressed);
-        states.addState(new int[] {-android.R.attr.state_enabled}, mDrawableDisabled);
-        states.addState(new int[] {}, mDrawableNormal);
+        states.addState(new int[] {android.R.attr.state_pressed, android.R.attr.state_enabled}, drawablePressed);
+        states.addState(new int[] {android.R.attr.state_focused, android.R.attr.state_enabled}, drawablePressed);
+        states.addState(new int[] {-android.R.attr.state_enabled}, drawableDisabled);
+        states.addState(new int[] {}, drawableNormal);
 
         return states;
     }
@@ -270,19 +254,20 @@ public class CustomizableButton extends AppCompatButton {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private Drawable getRippleDrawable() {
 
+        Drawable drawableNormal = DrawableFactory.getBackgroundDrawable(mDrawableNormal);
         GradientDrawable mask = new GradientDrawable();
 
-        if (mDrawableNormal.getConstantState() != null) {
+        if (drawableNormal.getConstantState() != null) {
             // Clone the GradientDrawable default and sets the color to white and maintains round corners (if any).
             // This fixes problems with transparent color and rounded corners.
-            mask = (GradientDrawable) mDrawableNormal.getConstantState().newDrawable();
+            mask = (GradientDrawable) drawableNormal.getConstantState().newDrawable();
             mask.setColor(Color.WHITE);
         }
 
         if (mUseRippleEffect && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-            mRippleColor = mBackgroundColorPressed;
+            mRippleColor = mDrawablePressed.getBackgroundColor();
 
-        return new RippleDrawable(ColorUtil.getRippleColorFromColor(mRippleColor, mRippleOpacity), mDrawableNormal, mask);
+        return new RippleDrawable(ColorUtil.getRippleColorFromColor(mRippleColor, mRippleOpacity), drawableNormal, mask);
 
     }
 
@@ -296,52 +281,52 @@ public class CustomizableButton extends AppCompatButton {
     }
 
     public int getBackgroundColorNormal() {
-        return mBackgroundColorNormal;
+        return mDrawableNormal.getBackgroundColor();
     }
 
     public void setBackgroundColorNormal(int color) {
-        this.mBackgroundColorNormal = color;
+        mDrawableNormal.setBackgroundColor(color);
         setupButton();
     }
 
     public float getBackgroundOpacityNormal() {
-        return mBackgroundOpacityNormal;
+        return mDrawableNormal.getBackgroundOpacity();
     }
 
     public void setBackgroundOpacityNormal(float opacity) {
         if (opacity >= 0 && opacity <= 1) {
-            this.mBackgroundOpacityNormal = opacity;
+            mDrawableNormal.setBackgroundOpacity(opacity);
             setupButton();
         }
     }
 
     public int getBorderColorNormal() {
-        return mBorderColorNormal;
+        return mDrawableNormal.getBorderColor();
     }
 
     public void setBorderColorNormal(int color) {
-        this.mBorderColorNormal = color;
+        mDrawableNormal.setBorderColor(color);
         setupButton();
     }
 
     public int getBorderThicknessNormal() {
-        return mBorderThicknessNormal;
+        return mDrawableNormal.getBorderThickness();
     }
 
     public void setBorderThicknessNormal(int thickness) {
         if (thickness >= 0) {
-            this.mBorderThicknessNormal = thickness;
+            mDrawableNormal.setBorderThickness(thickness);
             setupButton();
         }
     }
 
     public int getBorderRadiusNormal() {
-        return mBorderRadiusNormal;
+        return mDrawableNormal.getBorderRadius();
     }
 
     public void setBorderRadiusNormal(int radius) {
         if (radius >= 0) {
-            this.mBorderRadiusNormal = radius;
+            mDrawableNormal.setBorderRadius(radius);
             setupButton();
         }
     }
@@ -356,54 +341,53 @@ public class CustomizableButton extends AppCompatButton {
     }
 
     public int getBackgroundColorPressed() {
-        return mBackgroundColorPressed;
+        return mDrawablePressed.getBackgroundColor();
     }
 
     public void setBackgroundColorPressed(int color) {
-        this.mBackgroundColorPressed = color;
+        mDrawablePressed.setBackgroundColor(color);
         setupButton();
     }
 
     public float getBackgroundOpacityPressed() {
-        return mBackgroundOpacityPressed;
+        return mDrawablePressed.getBackgroundOpacity();
     }
 
     public void setBackgroundOpacityPressed(float opacity) {
         if (opacity >= 0 && opacity < 1) {
-            this.mBackgroundOpacityPressed = opacity;
+            mDrawablePressed.setBackgroundOpacity(opacity);
             setupButton();
         }
     }
 
     public int getBorderColorPressed() {
-        return mBorderColorPressed;
+        return mDrawablePressed.getBorderColor();
     }
 
     public void setBorderColorPressed(int color) {
-
-        this.mBorderColorPressed = color;
+        mDrawablePressed.setBorderColor(color);
         setupButton();
 
     }
 
     public int getBorderThicknessPressed() {
-        return mBorderThicknessPressed;
+        return mDrawablePressed.getBorderThickness();
     }
 
     public void setBorderThicknessPressed(int thickness) {
         if (thickness >= 0) {
-            this.mBorderThicknessPressed = thickness;
+            mDrawablePressed.setBorderThickness(thickness);
             setupButton();
         }
     }
 
     public int getBorderRadiusPressed() {
-        return mBorderRadiusPressed;
+        return mDrawablePressed.getBorderRadius();
     }
 
     public void setBorderRadiusPressed(int radius) {
         if (radius >= 0) {
-            this.mBorderRadiusPressed = radius;
+            mDrawablePressed.setBorderRadius(radius);
             setupButton();
         }
     }
@@ -418,52 +402,52 @@ public class CustomizableButton extends AppCompatButton {
     }
 
     public int getBackgroundColorDisabled() {
-        return mBackgroundColorDisabled;
+        return mDrawableDisabled.getBackgroundColor();
     }
 
     public void setBackgroundColorDisabled(int color) {
-        this.mBackgroundColorDisabled = color;
+        mDrawableDisabled.setBackgroundColor(color);
         setupButton();
     }
 
     public float getBackgroundOpacityDisabled() {
-        return mBackgroundOpacityDisabled;
+        return mDrawableDisabled.getBackgroundOpacity();
     }
 
     public void setBackgroundOpacityDisabled(float opacity) {
         if (opacity >= 0 && opacity <= 1) {
-            this.mBackgroundOpacityDisabled = opacity;
+            mDrawableDisabled.setBackgroundOpacity(opacity);
             setupButton();
         }
     }
 
     public int getBorderColorDisabled() {
-        return mBorderColorDisabled;
+        return mDrawableDisabled.getBorderColor();
     }
 
     public void setBorderColorDisabled(int color) {
-        this.mBorderColorDisabled = color;
+        mDrawableDisabled.setBorderColor(color);
         setupButton();
     }
 
     public int getBorderThicknessDisabled() {
-        return mBorderThicknessDisabled;
+        return mDrawableDisabled.getBorderThickness();
     }
 
     public void setBorderThicknessDisabled(int thickness) {
         if (thickness >= 0) {
-            this.mBorderThicknessDisabled = thickness;
+            mDrawableDisabled.setBorderThickness(thickness);
             setupButton();
         }
     }
 
     public int getBorderRadiusDisabled() {
-        return mBorderRadiusDisabled;
+        return mDrawableDisabled.getBorderRadius();
     }
 
     public void setBorderRadiusDisabled(int radius) {
         if (radius >= 0) {
-            this.mBorderRadiusDisabled = radius;
+            mDrawableDisabled.setBorderRadius(radius);
             setupButton();
         }
     }
