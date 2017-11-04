@@ -11,17 +11,17 @@
         <attr name="android:textStyle" />
 
         <!-- normal -->
-        <attr name="cb_textColor" format="color"/>
-        <attr name="cb_backgroundColor" format="color"/>
-        <attr name="cb_backgroundColorOpacity" format="float"/>
-        <attr name="cb_borderColor" format="color"/>
-        <attr name="cb_borderThickness" format="dimension"/>
-        <attr name="cb_borderRadius" format="dimension"/>
+        <attr name="cb_textColorNormal" format="color"/>
+        <attr name="cb_backgroundColorNormal" format="color"/>
+        <attr name="cb_backgroundOpacityNormal" format="float"/>
+        <attr name="cb_borderColorNormal" format="color"/>
+        <attr name="cb_borderThicknessNormal" format="dimension"/>
+        <attr name="cb_borderRadiusNormal" format="dimension"/>
 
         <!-- pressed -->
         <attr name="cb_textColorPressed" format="color"/>
         <attr name="cb_backgroundColorPressed" format="color"/>
-        <attr name="cb_backgroundColorOpacityPressed" format="float"/>
+        <attr name="cb_backgroundOpacityPressed" format="float"/>
         <attr name="cb_borderColorPressed" format="color"/>
         <attr name="cb_borderThicknessPressed" format="dimension"/>
         <attr name="cb_borderRadiusPressed" format="dimension"/>
@@ -29,7 +29,7 @@
         <!-- disabled -->
         <attr name="cb_textColorDisabled" format="color"/>
         <attr name="cb_backgroundColorDisabled" format="color"/>
-        <attr name="cb_backgroundColorOpacityDisabled" format="float"/>
+        <attr name="cb_backgroundOpacityDisabled" format="float"/>
         <attr name="cb_borderColorDisabled" format="color"/>
         <attr name="cb_borderThicknessDisabled" format="dimension"/>
         <attr name="cb_borderRadiusDisabled" format="dimension"/>

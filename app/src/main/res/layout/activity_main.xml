@@ -11,6 +11,7 @@
     tools:context="com.github.gabrielgouv.androidcustomizablebuttons.MainActivity">
 
     <com.github.gabrielgouv.customizablebuttons.CustomizableButton
+        android:id="@+id/btnTeste"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cb_text="Customizable Button"
@@ -18,8 +19,8 @@
         app:cb_rippleColor="@color/colorAccent"
         app:cb_rippleOpacity="1"
         app:cb_elevation="4dp"
-        app:cb_backgroundColor="#5758FF"
-        app:cb_borderRadius="30dp"/>
+        app:cb_backgroundColorNormal="#5758FF"
+        app:cb_borderRadiusNormal="30dp"/>
 
     <Space
         android:layout_width="16dp"
@@ -33,8 +34,8 @@
         app:cb_rippleColor="#ffffff"
         app:cb_rippleOpacity="0.5"
         app:cb_elevation="4dp"
-        app:cb_backgroundColor="#E54C65"
-        app:cb_borderRadius="10dp"/>
+        app:cb_backgroundColorNormal="#E54C65"
+        app:cb_borderRadiusNormal="10dp"/>
 
     <Space
         android:layout_width="16dp"
@@ -44,13 +45,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cb_text="Customizable Button"
-        app:cb_textColor="#8715FF"
+        app:cb_textColorNormal="#8715FF"
         app:cb_useRippleEffect="true"
-        app:cb_backgroundColorOpacity="0"
+        app:cb_backgroundOpacityNormal="0"
         app:cb_rippleColor="#8715FF"
-        app:cb_borderColor="#8715FF"
-        app:cb_borderThickness="2dp"
-        app:cb_borderRadius="10dp"/>
+        app:cb_borderColorNormal="#8715FF"
+        app:cb_borderThicknessNormal="2dp"
+        app:cb_borderRadiusNormal="10dp"/>
 
     <Space
         android:layout_width="16dp"
@@ -64,7 +65,12 @@
         app:cb_useRippleEffect="true"
         app:cb_rippleColor="#ffffff"
         app:cb_rippleOpacity="0.5"
-        app:cb_backgroundColor="#E54C65"
-        app:cb_borderRadius="10dp"/>
+        app:cb_backgroundColorNormal="#E54C65"
+        app:cb_borderRadiusNormal="10dp"/>
+
+    <Space
+        android:layout_width="16dp"
+        android:layout_height="16dp" />
+
 
 </LinearLayout>

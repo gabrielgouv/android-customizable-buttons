@@ -14,27 +14,21 @@ public final class ColorUtil {
     }
 
     static int darkenLightenColor(int color, float factor) {
-        int a = Color.alpha(color);
-        int r = Math.round(Color.red(color) * factor);
-        int g = Math.round(Color.green(color) * factor);
-        int b = Math.round(Color.blue(color) * factor);
 
-        return Color.argb(a,
-                Math.min(r,255),
-                Math.min(g,255),
-                Math.min(b,255));
+        return Color.argb(Color.alpha(color),
+                Math.min(Math.round(Color.red(color) * factor), 255),
+                Math.min(Math.round(Color.green(color) * factor), 255),
+                Math.min(Math.round(Color.blue(color) * factor), 255));
+
     }
 
     static int useOpacity(int color, float opacity) {
-        int a = Math.round(opacity * 255);
-        int r = Math.round(Color.red(color));
-        int g = Math.round(Color.green(color));
-        int b = Math.round(Color.blue(color));
 
-        return Color.argb(Math.min(a, 255),
-                Math.min(r,255),
-                Math.min(g,255),
-                Math.min(b,255));
+        return Color.argb(Math.min(Math.round(opacity * 255), 255),
+                Math.min(Math.round(Color.red(color)), 255),
+                Math.min(Math.round(Color.green(color)), 255),
+                Math.min(Math.round(Color.blue(color)), 255));
+
     }
 
     /**
