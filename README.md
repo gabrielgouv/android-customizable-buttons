@@ -40,17 +40,17 @@ In this basic example you can see how to easily create a custom button with ripp
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cb_text="Normal / Enabled"
-        app:cb_textColor="#DAEBF2"
+        app:cb_textColorNormal="#DAEBF2"
         app:cb_textAllCaps="true"
         app:cb_elevation="4dp"
         app:cb_useRippleEffect="true"
         app:cb_rippleColor="#012C40"
         app:cb_rippleOpacity="1"
-        app:cb_backgroundColor="#00708C"
+        app:cb_backgroundColorNormal="#00708C"
         app:cb_backgroundColorPressed="#012C40"
-        app:cb_borderColor="#012C40"
-        app:cb_borderThickness="2dp"
-        app:cb_borderRadius="30dp" />
+        app:cb_borderColorNormal="#012C40"
+        app:cb_borderThicknessNormal="2dp"
+        app:cb_borderRadiusNormal="30dp" />
 ```
 
 You can use `android:enabled="false"` or `app:cb_enabled="false"` to set your button disabled. You can check the [**Button XML Attributes**](https://github.com/GabrielGouv/Android-Customizable-Buttons/wiki/Button-XML-Attributes) for more information about attributes.
