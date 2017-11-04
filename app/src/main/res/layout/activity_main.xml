@@ -20,6 +20,7 @@
         app:cb_rippleOpacity="1"
         app:cb_elevation="4dp"
         app:cb_backgroundColorNormal="#5758FF"
+        app:cb_backgroundColorPressed="@color/colorAccent"
         app:cb_borderRadiusNormal="30dp"/>
 
     <Space

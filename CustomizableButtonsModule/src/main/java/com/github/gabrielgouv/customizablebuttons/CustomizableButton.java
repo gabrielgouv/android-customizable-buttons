@@ -3,14 +3,10 @@ package com.github.gabrielgouv.customizablebuttons;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
@@ -155,26 +151,13 @@ public class CustomizableButton extends BaseButton {
         setButtonText();
 
         if (mEnabled && mRippleAttributes.isUseRippleEffect() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setButtonBackground(getRippleDrawable());
+            setButtonBackground(DrawableFactory.getRippleDrawable(mDrawableNormal, mRippleAttributes));
         } else {
             setButtonBackground(getButtonBackgrounds());
         }
 
     }
 
-    /**
-     * Set button background for all APIs
-     */
-
-    private void setButtonBackground(Drawable drawable) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            this.setBackground(drawable);
-        } else {
-            this.setBackgroundDrawable(drawable);
-        }
-
-    }
 
     /**
      * Set button text
@@ -235,25 +218,6 @@ public class CustomizableButton extends BaseButton {
      * @return Ripple effect
      */
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private Drawable getRippleDrawable() {
-
-        Drawable drawableNormal = DrawableFactory.getBackgroundDrawable(mDrawableNormal);
-        GradientDrawable mask = new GradientDrawable();
-
-        if (drawableNormal.getConstantState() != null) {
-            // Clone the GradientDrawable default and sets the color to white and maintains round corners (if any).
-            // This fixes problems with transparent color and rounded corners.
-            mask = (GradientDrawable) drawableNormal.getConstantState().newDrawable();
-            mask.setColor(Color.WHITE);
-        }
-
-        if (mRippleAttributes.isUseRippleEffect() && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-            mRippleAttributes.setRippleColor(mDrawablePressed.getBackgroundColor());
-
-        return new RippleDrawable(ColorUtil.getRippleColorFromColor(mRippleAttributes.getRippleColor(), mRippleAttributes.getRippleOpacity()), drawableNormal, mask);
-
-    }
 
     public int getTextColorNormal() {
         return mTextColorNormal;

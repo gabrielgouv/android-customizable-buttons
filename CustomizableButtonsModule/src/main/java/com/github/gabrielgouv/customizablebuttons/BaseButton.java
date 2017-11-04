@@ -1,6 +1,8 @@
 package com.github.gabrielgouv.customizablebuttons;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 
@@ -39,5 +41,15 @@ public abstract class BaseButton extends AppCompatButton {
     }
 
     protected abstract void init();
+
+    protected void setButtonBackground(Drawable drawable) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            this.setBackground(drawable);
+        } else {
+            this.setBackgroundDrawable(drawable);
+        }
+
+    }
 
 }
