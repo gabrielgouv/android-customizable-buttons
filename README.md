@@ -1,4 +1,4 @@
-![sample](https://i.imgur.com/MOnhoet.png)
+![sample](https://i.imgur.com/OJ2qtWT.png)
 
 <p align="center">
   
