@@ -74,20 +74,9 @@
         android:layout_height="16dp" />
 
     <com.github.gabrielgouv.customizablebuttons.CustomizableButton
+        android:id="@+id/customizableButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cb_text="Normal / Enabled"
-        app:cb_textColorNormal="#DAEBF2"
-        app:cb_textAllCaps="true"
-        app:cb_elevation="4dp"
-        app:cb_useRippleEffect="true"
-        app:cb_rippleColor="#012C40"
-        app:cb_rippleOpacity="1"
-        app:cb_backgroundColorNormal="#00708C"
-        app:cb_backgroundColorPressed="#012C40"
-        app:cb_borderColorNormal="#012C40"
-        app:cb_borderThicknessNormal="2dp"
-        app:cb_borderRadiusNormal="30dp" />
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
