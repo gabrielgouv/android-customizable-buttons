@@ -11,8 +11,9 @@
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="Gratipay"></a>
   
-  <a href="https://codebeat.co/projects/github-com-gabrielgouv-android-customizable-buttons-master"><img alt="codebeat badge" src="https://codebeat.co/badges/2cb80feb-4021-44b1-9996-2497919e3664" /></a>
-  
+  <a href="https://codebeat.co/projects/github-com-gabrielgouv-android-customizable-buttons-master">
+    <img alt="codebeat badge" src="https://codebeat.co/badges/2cb80feb-4021-44b1-9996-2497919e3664" /></a>
+    
  </p>
 
 <br>
