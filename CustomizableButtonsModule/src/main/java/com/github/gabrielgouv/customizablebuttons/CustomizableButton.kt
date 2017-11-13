@@ -16,7 +16,7 @@ import com.github.gabrielgouv.customizablebuttons.util.DrawableFactory
 
 open class CustomizableButton : BaseButton {
 
-    object Constants {
+    companion object {
         val DEFAULT_USE_RIPPLE_EFFECT = false
         val DEFAULT_RIPPLE_COLOR = -0x1000000 //0xff000000
         val DEFAULT_RIPPLE_OPACITY = 0.26f
@@ -37,14 +37,14 @@ open class CustomizableButton : BaseButton {
     }
 
     private var mText: String? = null
-    private var mTextSize: Int = Constants.DEFAULT_TEXT_SIZE
-    private var mTextStyle: Int = Constants.DEFAULT_TEXT_STYLE
+    private var mTextSize: Int = DEFAULT_TEXT_SIZE
+    private var mTextStyle: Int = DEFAULT_TEXT_STYLE
     private var mTextColorNormal: Int = ColorUtil.getTextColorFromBackgroundColor(mDrawableNormal.backgroundColor)
     private var mTextColorPressed: Int = ColorUtil.getTextColorFromBackgroundColor(mDrawablePressed.backgroundColor)
-    private var mTextColorDisabled: Int = Constants.DEFAULT_DISABLED_TEXT_COLOR
+    private var mTextColorDisabled: Int = DEFAULT_DISABLED_TEXT_COLOR
     private var mTextAllCaps: Boolean = false
     private var mEnabled: Boolean = true
-    private var mElevation: Int = Constants.DEFAULT_ELEVATION
+    private var mElevation: Int = DEFAULT_ELEVATION
 
     private lateinit var mRippleAttributes: RippleAttributes
     private lateinit var mDrawableNormal: DrawableAttributes
@@ -52,37 +52,35 @@ open class CustomizableButton : BaseButton {
     private lateinit var mDrawableDisabled: DrawableAttributes
 
     constructor(context: Context) : super(context)
-
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun init() {
+    override fun initButton() {
         initAttributes()
         setupButton()
     }
 
     /**
-     * Initialize attributes
+     * Initialize button attributes
      */
 
     private fun initAttributes() {
 
-        val typedArray = mContext.obtainStyledAttributes(mAttrs, R.styleable.CustomizableButton, mDefStyleAttr, 0)
+        val typedArray = mContext.obtainStyledAttributes(mAttrs, R.styleable.CustomizableButton, mDefStyleAttr!!, 0)
 
         // normal state
         mDrawableNormal = DrawableAttributes()
-        mDrawableNormal.backgroundColor = typedArray?.getColor(R.styleable.CustomizableButton_cb_backgroundColorNormal, Constants.DEFAULT_BACKGROUND_COLOR)!!
-        mDrawableNormal.backgroundOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityNormal, Constants.DEFAULT_BACKGROUND_OPACITY)
-        mDrawableNormal.borderColor = typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorNormal, Constants.DEFAULT_BORDER_COLOR)
-        mDrawableNormal.borderThickness = typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessNormal, Constants.DEFAULT_BORDER_THICKNESS.toFloat()).toInt()
-        mDrawableNormal.borderRadius = typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusNormal, Constants.DEFAULT_BORDER_RADIUS.toFloat()).toInt()
+        mDrawableNormal.backgroundColor = typedArray?.getColor(R.styleable.CustomizableButton_cb_backgroundColorNormal, DEFAULT_BACKGROUND_COLOR)!!
+        mDrawableNormal.backgroundOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityNormal, DEFAULT_BACKGROUND_OPACITY)
+        mDrawableNormal.borderColor = typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorNormal, DEFAULT_BORDER_COLOR)
+        mDrawableNormal.borderThickness = typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessNormal, DEFAULT_BORDER_THICKNESS.toFloat()).toInt()
+        mDrawableNormal.borderRadius = typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusNormal, DEFAULT_BORDER_RADIUS.toFloat()).toInt()
         mTextColorNormal = typedArray.getColor(R.styleable.CustomizableButton_cb_textColorNormal, ColorUtil.getTextColorFromBackgroundColor(mDrawableNormal.backgroundColor))
 
         // pressed/focused state
         mDrawablePressed = DrawableAttributes()
-        mDrawablePressed.backgroundColor = typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorPressed, ColorUtil.darkenLightenColor(mDrawableNormal.backgroundColor, Constants.DEFAULT_COLOR_FACTOR))
-        mDrawablePressed.backgroundOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityPressed, Constants.DEFAULT_BACKGROUND_OPACITY)
+        mDrawablePressed.backgroundColor = typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorPressed, ColorUtil.darkenLightenColor(mDrawableNormal.backgroundColor, DEFAULT_COLOR_FACTOR))
+        mDrawablePressed.backgroundOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityPressed, DEFAULT_BACKGROUND_OPACITY)
         mDrawablePressed.borderColor = typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorPressed, mDrawableNormal.backgroundColor)
         mDrawablePressed.borderThickness = typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessPressed, mDrawableNormal.borderThickness.toFloat()).toInt()
         mDrawablePressed.borderRadius = typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusPressed, mDrawableNormal.borderRadius.toFloat()).toInt()
@@ -90,57 +88,58 @@ open class CustomizableButton : BaseButton {
 
         // disabled state
         mDrawableDisabled = DrawableAttributes()
-        mDrawableDisabled.backgroundColor = typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorDisabled, Constants.DEFAULT_DISABLED_BACKGROUND_COLOR)
-        mDrawableDisabled.backgroundOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityDisabled, Constants.DEFAULT_BACKGROUND_OPACITY)
-        mDrawableDisabled.borderColor = typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorDisabled, Constants.DEFAULT_DISABLED_BORDER_COLOR)
+        mDrawableDisabled.backgroundColor = typedArray.getColor(R.styleable.CustomizableButton_cb_backgroundColorDisabled, DEFAULT_DISABLED_BACKGROUND_COLOR)
+        mDrawableDisabled.backgroundOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_backgroundOpacityDisabled, DEFAULT_BACKGROUND_OPACITY)
+        mDrawableDisabled.borderColor = typedArray.getColor(R.styleable.CustomizableButton_cb_borderColorDisabled, DEFAULT_DISABLED_BORDER_COLOR)
         mDrawableDisabled.borderThickness = typedArray.getDimension(R.styleable.CustomizableButton_cb_borderThicknessDisabled, mDrawableNormal.borderThickness.toFloat()).toInt()
         mDrawableDisabled.borderRadius = typedArray.getDimension(R.styleable.CustomizableButton_cb_borderRadiusDisabled, mDrawableNormal.borderRadius.toFloat()).toInt()
-        mTextColorDisabled = typedArray.getColor(R.styleable.CustomizableButton_cb_textColorDisabled, Constants.DEFAULT_DISABLED_TEXT_COLOR)
+        mTextColorDisabled = typedArray.getColor(R.styleable.CustomizableButton_cb_textColorDisabled, DEFAULT_DISABLED_TEXT_COLOR)
 
         // general
-        mEnabled = typedArray.getBoolean(R.styleable.CustomizableButton_cb_enabled, Constants.DEFAULT_BUTTON_ENABLED)
+        mEnabled = typedArray.getBoolean(R.styleable.CustomizableButton_cb_enabled, DEFAULT_BUTTON_ENABLED)
         mEnabled = typedArray.getBoolean(R.styleable.CustomizableButton_android_enabled, mEnabled)
         mText = typedArray.getString(R.styleable.CustomizableButton_cb_text)
-        if (mText == null)
-            mText = typedArray.getString(R.styleable.CustomizableButton_android_text)
-        mTextSize = typedArray.getDimension(R.styleable.CustomizableButton_cb_textSize, Constants.DEFAULT_TEXT_SIZE.toFloat()).toInt()
+        if (mText == null) mText = typedArray.getString(R.styleable.CustomizableButton_android_text)
+        mTextSize = typedArray.getDimension(R.styleable.CustomizableButton_cb_textSize, DEFAULT_TEXT_SIZE.toFloat()).toInt()
         mTextSize = typedArray.getDimension(R.styleable.CustomizableButton_android_textSize, mTextSize.toFloat()).toInt()
-        mTextStyle = typedArray.getInt(R.styleable.CustomizableButton_cb_textStyle, Constants.DEFAULT_TEXT_STYLE)
+        mTextStyle = typedArray.getInt(R.styleable.CustomizableButton_cb_textStyle, DEFAULT_TEXT_STYLE)
         mTextStyle = typedArray.getInt(R.styleable.CustomizableButton_android_textStyle, mTextStyle)
-        mTextAllCaps = typedArray.getBoolean(R.styleable.CustomizableButton_cb_textAllCaps, Constants.DEFAULT_TEXT_ALL_CAPS)
+        mTextAllCaps = typedArray.getBoolean(R.styleable.CustomizableButton_cb_textAllCaps, DEFAULT_TEXT_ALL_CAPS)
         mTextAllCaps = typedArray.getBoolean(R.styleable.CustomizableButton_android_textAllCaps, mTextAllCaps)
-
-        mElevation = typedArray.getDimension(R.styleable.CustomizableButton_cb_elevation, Constants.DEFAULT_ELEVATION.toFloat()).toInt()
+        mElevation = typedArray.getDimension(R.styleable.CustomizableButton_cb_elevation, DEFAULT_ELEVATION.toFloat()).toInt()
+        mElevation = typedArray.getDimension(R.styleable.CustomizableButton_android_elevation, mElevation.toFloat()).toInt()
 
         mRippleAttributes = RippleAttributes()
-        mRippleAttributes.isUseRippleEffect = typedArray.getBoolean(R.styleable.CustomizableButton_cb_useRippleEffect, Constants.DEFAULT_USE_RIPPLE_EFFECT)
-        mRippleAttributes.rippleColor = typedArray.getColor(R.styleable.CustomizableButton_cb_rippleColor, Constants.DEFAULT_RIPPLE_COLOR)
-        mRippleAttributes.rippleOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_rippleOpacity, Constants.DEFAULT_RIPPLE_OPACITY)
+        mRippleAttributes.isUseRippleEffect = typedArray.getBoolean(R.styleable.CustomizableButton_cb_useRippleEffect, DEFAULT_USE_RIPPLE_EFFECT)
+        mRippleAttributes.rippleColor = typedArray.getColor(R.styleable.CustomizableButton_cb_rippleColor, DEFAULT_RIPPLE_COLOR)
+        mRippleAttributes.rippleOpacity = typedArray.getFloat(R.styleable.CustomizableButton_cb_rippleOpacity, DEFAULT_RIPPLE_OPACITY)
 
         typedArray.recycle()
 
     }
 
     /**
-     * Setup the button
+     * Setup button background and text
      */
 
     private fun setupButton() {
 
+        setButtonText()
+
         this.isEnabled = mEnabled
         this.setPadding(DimensionUtil.dipToPx(16f), 0, DimensionUtil.dipToPx(16f), 0)
 
+        // APIs below 21 doesn't support elevation, if elevation is enabled in APIs prior 21 it will not be used
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            stateListAnimator = null
+            stateListAnimator = null // remove default elevation effect
             elevation = mElevation.toFloat()
         }
 
-        setButtonText()
-
+        // APIs below 21 doesn't support ripple effect, if ripple is enabled in APIs prior 21 will be used state list drawable instead
         if (mEnabled && mRippleAttributes.isUseRippleEffect && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setButtonBackground(DrawableFactory.getRippleDrawable(mDrawableNormal, mRippleAttributes))
         } else {
-            setButtonBackground(getButtonBackgrounds())
+            setButtonBackground(getButtonBackgroundStateList())
         }
 
     }
@@ -151,7 +150,7 @@ open class CustomizableButton : BaseButton {
 
     private fun setButtonText() {
 
-        this.setTextColor(getButtonTextColors())
+        this.setTextColor(getButtonTextColorStateList())
         this.setAllCaps(mTextAllCaps)
         this.text = mText
         this.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize.toFloat())
@@ -159,7 +158,7 @@ open class CustomizableButton : BaseButton {
 
     }
 
-    private fun getButtonBackgrounds(): Drawable {
+    private fun getButtonBackgroundStateList(): Drawable {
 
         val drawableNormal = DrawableFactory.getBackgroundDrawable(mDrawableNormal)
         val drawablePressed = DrawableFactory.getBackgroundDrawable(mDrawablePressed)
@@ -175,7 +174,7 @@ open class CustomizableButton : BaseButton {
         return states
     }
 
-    private fun getButtonTextColors(): ColorStateList {
+    private fun getButtonTextColorStateList(): ColorStateList {
 
         if (mRippleAttributes.isUseRippleEffect && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             mTextColorPressed = mTextColorNormal
@@ -219,14 +218,14 @@ open class CustomizableButton : BaseButton {
 
     fun setBorderThicknessNormal(thickness: Int) {
         if (thickness >= 0) {
-            mDrawableNormal.borderThickness = thickness
+            mDrawableNormal.borderThickness = DimensionUtil.dipToPx(thickness.toFloat())
             setupButton()
         }
     }
 
     fun setBorderRadiusNormal(radius: Int) {
         if (radius >= 0) {
-            mDrawableNormal.borderRadius = radius
+            mDrawableNormal.borderRadius = DimensionUtil.dipToPx(radius.toFloat())
             setupButton()
         }
     }
@@ -256,14 +255,14 @@ open class CustomizableButton : BaseButton {
 
     fun setBorderThicknessPressed(thickness: Int) {
         if (thickness >= 0) {
-            mDrawablePressed.borderThickness = thickness
+            mDrawablePressed.borderThickness = DimensionUtil.dipToPx(thickness.toFloat())
             setupButton()
         }
     }
 
     fun setBorderRadiusPressed(radius: Int) {
         if (radius >= 0) {
-            mDrawablePressed.borderRadius = radius
+            mDrawablePressed.borderRadius = DimensionUtil.dipToPx(radius.toFloat())
             setupButton()
         }
     }
@@ -292,14 +291,14 @@ open class CustomizableButton : BaseButton {
 
     fun setBorderThicknessDisabled(thickness: Int) {
         if (thickness >= 0) {
-            mDrawableDisabled.borderThickness = thickness
+            mDrawableDisabled.borderThickness = DimensionUtil.dipToPx(thickness.toFloat())
             setupButton()
         }
     }
 
     fun setBorderRadiusDisabled(radius: Int) {
         if (radius >= 0) {
-            mDrawableDisabled.borderRadius = radius
+            mDrawableDisabled.borderRadius = DimensionUtil.dipToPx(radius.toFloat())
             setupButton()
         }
     }

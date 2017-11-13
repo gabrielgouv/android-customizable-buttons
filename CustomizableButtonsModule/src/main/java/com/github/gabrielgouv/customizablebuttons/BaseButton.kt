@@ -9,28 +9,29 @@ import android.util.AttributeSet
 abstract class BaseButton : AppCompatButton {
 
     protected var mContext: Context
-    protected lateinit var mAttrs: AttributeSet
-    protected var mDefStyleAttr: Int = 0
+    protected var mAttrs: AttributeSet?
+    protected var mDefStyleAttr: Int? = 0
 
     constructor(context: Context) : super(context) {
         mContext = context
-        this.init()
+        mAttrs = null
+        this.initButton()
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         mContext = context
         mAttrs = attrs
-        this.init()
+        this.initButton()
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         mContext = context
         mAttrs = attrs
         mDefStyleAttr = defStyleAttr
-        this.init()
+        this.initButton()
     }
 
-    abstract fun init()
+    protected abstract fun initButton()
 
     protected fun setButtonBackground(drawable: Drawable) {
 

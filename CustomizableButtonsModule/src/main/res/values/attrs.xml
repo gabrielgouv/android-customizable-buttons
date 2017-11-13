@@ -9,6 +9,7 @@
         <attr name="android:textSize" />
         <attr name="android:textAllCaps" />
         <attr name="android:textStyle" />
+        <attr name="android:elevation" />
 
         <!-- normal -->
         <attr name="cb_textColorNormal" format="color"/>

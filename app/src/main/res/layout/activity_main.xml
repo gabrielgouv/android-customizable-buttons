@@ -34,9 +34,9 @@
         app:cb_useRippleEffect="true"
         app:cb_rippleColor="#ffffff"
         app:cb_rippleOpacity="0.5"
-        app:cb_elevation="4dp"
+        app:cb_elevation="10dp"
         app:cb_backgroundColorNormal="#E54C65"
-        app:cb_borderRadiusNormal="10dp"/>
+        app:cb_borderRadiusNormal="20dp"/>
 
     <Space
         android:layout_width="16dp"

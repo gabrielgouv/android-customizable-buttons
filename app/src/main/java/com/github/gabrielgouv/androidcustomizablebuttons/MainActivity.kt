@@ -16,6 +16,11 @@ class MainActivity : AppCompatActivity() {
         customizableButton.setBackgroundColorPressed(Color.parseColor("#F37402"))
         customizableButton.setTextColorNormal(Color.parseColor("#F3FF82"))
         customizableButton.setTextColorPressed(Color.parseColor("#F34605"))
+        customizableButton.setBorderRadiusNormal(20)
+        customizableButton.setBorderRadiusPressed(20)
+        customizableButton.setBorderColorNormal(Color.parseColor("#000000"))
+        customizableButton.setBorderThicknessNormal(2)
+
         customizableButton.text = ("Customizable Bugdgtton")
         customizableButton.textSize = 20F
 
