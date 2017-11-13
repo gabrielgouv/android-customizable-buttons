@@ -1,4 +1,4 @@
-![sample](https://i.imgur.com/OJ2qtWT.png)
+![sample](https://i.imgur.com/NLFApCt.png)
 
 <p align="center">
   
@@ -10,17 +10,14 @@
   
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="Gratipay"></a>
-  
-  <a href="https://www.codacy.com/app/GabrielGouv/Android-Customizable-Buttons?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GabrielGouv/Android-Customizable-Buttons&amp;utm_campaign=Badge_Grade">
-  <img src="https://api.codacy.com/project/badge/Grade/20a52dd334204b64a361d313435e5a1c"/></a>
-  
+    
  </p>
 
 <br>
 
-Create an XML file that represents the button states? Create an XML file that represents each button state? No more. With Customizable Buttons for Android you can easily create custom buttons for your app!
+Create an XML file that represents the button states? Create an XML file that represents each button state? No more. Customizable Buttons is a library for Android built in **Kotlin**, you can easily create custom buttons for your app!
 
-**NOTE:** This is a work in progress and is not recommended to use in your project yet. The documentation and plugin repository will be added soon, when the project reaches a more mature stage.
+**NOTE:** This is a work in progress and is not recommended to use in your project yet. **The documentation and plugin repository will be added soon**, when the project reaches a more mature stage.
 
 <br><br>
 <p align="center">
