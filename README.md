@@ -18,7 +18,7 @@
 
 <br>
 
-Create an XML file that represents the button states? Create an XML file that represents each button state? No more. Customizable Buttons is a library for Android built in **Kotlin** you can easily create custom buttons for your app!
+Create an XML file that represents the button states? Create an XML file that represents each button state? No more. Customizable Buttons is a library for Android built in **Kotlin**, you can easily create custom buttons for your app!
 
 **NOTE:** This is a work in progress and is not recommended to use in your project yet. **The documentation and plugin repository will be added soon**, when the project reaches a more mature stage.
 
