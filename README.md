@@ -26,7 +26,7 @@ Create an XML file that represents the button states? Create an XML file that re
 
 # Usage
 
-In this basic example you can see how to easily create a custom button with ripple effect. Check the Wiki (soon) for more examples.
+In this basic example you can see how to easily create a custom button with ripple effect. Check the [Wiki](https://github.com/GabrielGouv/Android-Customizable-Buttons/wiki) for more examples.
 
 ### XML:
 ```XML
